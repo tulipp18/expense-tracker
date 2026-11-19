@@ -1,0 +1,4 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",ranksep="0.7",nodesep="0.4"]; node [fontname="Times New Roman",fontsize=14,shape=box,style="rounded,filled",fillcolor="#f7f9fb",color="#244d70",margin="0.15"]; edge [fontname="Times New Roman",fontsize=11,color="#374151",arrowsize=0.7];
+rankdir=LR; node [shape=record]; cat [label="Categories|PK id : INTEGER\lname : TEXT, UNIQUE, NOT NULL\l"]; exp [label="Expenses|PK id : INTEGER, AUTOINCREMENT\lspent_on : TEXT (ISO date)\lFK category_id : INTEGER\lamount_paise : INTEGER, greater than 0\lnote : TEXT, max 120 characters\l"]; cat -> exp [label="1                             0..*",arrowhead=crow];
+}
