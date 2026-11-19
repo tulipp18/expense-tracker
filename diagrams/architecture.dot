@@ -1,0 +1,9 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",ranksep="0.7",nodesep="0.4"]; node [fontname="Times New Roman",fontsize=14,shape=box,style="rounded,filled",fillcolor="#f7f9fb",color="#244d70",margin="0.15"]; edge [fontname="Times New Roman",fontsize=11,color="#374151",arrowsize=0.7];
+rankdir=TB; user [label="Browser
+Streamlit pages and forms"]; ui [label="Presentation | app.py
+filters, metrics, chart, CRUD forms, CSV"]; logic [label="Application / data access | storage.py
+validate(), save_expense(),
+list_expenses(), delete_expense()"]; db [label="SQLite | expenses.db
+Categories + Expenses",shape=cylinder]; user -> ui [dir=both,label="interaction / rendered results"]; ui -> logic [dir=both,label="function calls / rows, ID or error"]; logic -> db [dir=both,label="SQL transactions / records and results"];
+}
