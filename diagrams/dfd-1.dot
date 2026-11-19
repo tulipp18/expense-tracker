@@ -1,0 +1,9 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",ranksep="0.7",nodesep="0.4"]; node [fontname="Times New Roman",fontsize=14,shape=box,style="rounded,filled",fillcolor="#f7f9fb",color="#244d70",margin="0.15"]; edge [fontname="Times New Roman",fontsize=11,color="#374151",arrowsize=0.7];
+rankdir=TB; user [label="Local user"]; p1 [label="1.0
+Validate and maintain
+expenses",shape=ellipse]; p2 [label="2.0
+Retrieve and summarize
+filtered records",shape=ellipse]; p3 [label="3.0
+Format CSV export",shape=ellipse]; d1 [label="D1 | Categories",shape=cylinder]; d2 [label="D2 | Expenses",shape=cylinder]; user -> p1 [label="expense / edit / deletion"]; p1 -> user [label="result or validation error"]; d1 -> p1 [label="category IDs"]; p1 -> d2 [label="insert / update / delete"]; user -> p2 [label="date + category filters"]; d1 -> p2 [label="category labels"]; d2 -> p2 [label="matching expense rows"]; p2 -> user [label="records, totals, chart"]; p2 -> p3 [label="filtered rows"]; user -> p3 [label="download request"]; p3 -> user [label="CSV file"];
+}
