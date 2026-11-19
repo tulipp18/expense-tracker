@@ -56,6 +56,11 @@ st.title('💳 Expense Tracker')
 st.caption('Software Engineering mini-project | Python + Streamlit + '
            + ('PostgreSQL (persistent cloud storage)' if DSN else 'SQLite (local storage)'))
 
+st.warning(
+    'Shared public demo: anyone with this link can view, edit and delete the same '
+    'saved records. Do not enter real financial or personal data here.',
+    icon='\u26a0\ufe0f')
+
 
 def rupees(paise):
     return f'₹{paise/100:,.2f}'
@@ -73,7 +78,7 @@ with st.sidebar:
     category = st.selectbox('Category', ['All', *CATEGORIES])
     st.caption('Totals, chart and CSV follow these filters. The manage list always shows every saved record.')
     st.divider()
-    st.caption('Private app: only signed-in invited viewers can see or change these records.')
+    st.caption('Public demo: anyone with the link can see, change or delete these shared records.')
 
 if start > end:
     st.error('Start date must be on or before end date.')
