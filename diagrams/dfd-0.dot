@@ -1,0 +1,9 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",ranksep="0.7",nodesep="0.4"]; node [fontname="Times New Roman",fontsize=14,shape=box,style="rounded,filled",fillcolor="#f7f9fb",color="#244d70",margin="0.15"]; edge [fontname="Times New Roman",fontsize=11,color="#374151",arrowsize=0.7];
+rankdir=LR; graph [ranksep="2"]; user [label="Local user",shape=box]; app [label="0
+Expense Tracker",shape=ellipse]; user:ne -> app:nw [minlen=2,label="expense details and edits
+delete ID, filters
+export request"]; app:sw -> user:se [minlen=2,label="records and validation results
+filtered totals / chart
+CSV output"];
+}
