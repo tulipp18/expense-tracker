@@ -1,0 +1,5 @@
+Streamlit AppTest initial render: PASS
+Add 50.25: total 1849.75 PASS
+Update to 75.50: total 1875.00 PASS
+Confirmed delete: total restored to 1799.50 PASS
+No UI exceptions. Demo data restored.
