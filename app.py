@@ -6,13 +6,22 @@ Hosted runs use a PostgreSQL database configured through Streamlit secrets
 SQLite file next to storage.py only when EXPENSES_ALLOW_SQLITE=1 is set.
 """
 import os
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
 from decimal import Decimal
 import csv
 import io
 
 import pandas as pd
 import streamlit as st
+
+
+# The app is built for use in India: default dates follow Asia/Kolkata (UTC+5:30),
+# not the host server's timezone.
+IST = timezone(timedelta(hours=5, minutes=30), name='IST')
+
+
+def today_ist():
+    return datetime.now(IST).date()
 
 
 def _secret(key, default=None):
@@ -59,8 +68,8 @@ def safe_cell(s):
 
 with st.sidebar:
     st.header('🔎 Filters')
-    start = st.date_input('From', date.today().replace(day=1))
-    end = st.date_input('To', date.today())
+    start = st.date_input('From', today_ist().replace(day=1))
+    end = st.date_input('To', today_ist())
     category = st.selectbox('Category', ['All', *CATEGORIES])
     st.caption('Totals, chart and CSV follow these filters. The manage list always shows every saved record.')
     st.divider()
@@ -115,7 +124,7 @@ with tab_add:
     with st.form('add', clear_on_submit=True):
         c1, c2 = st.columns(2)
         with c1:
-            day = st.date_input('Expense date', date.today(), max_value=date.today())
+            day = st.date_input('Expense date', today_ist(), max_value=today_ist())
             cat = st.selectbox('Category', CATEGORIES, key='add-cat')
         with c2:
             amount = st.text_input('Amount (₹)', '', placeholder='e.g. 120.50')
@@ -143,7 +152,7 @@ with tab_manage:
         with st.form(f'edit-{selected}'):
             c1, c2 = st.columns(2)
             with c1:
-                d = st.date_input('New date', date.fromisoformat(r['spent_on']), max_value=date.today())
+                d = st.date_input('New date', date.fromisoformat(r['spent_on']), max_value=today_ist())
                 c = st.selectbox('New category', CATEGORIES, index=CATEGORIES.index(r['category']))
             with c2:
                 v = st.text_input('New amount (₹)', str(Decimal(r['amount_paise']) / 100))
