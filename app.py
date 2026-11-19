@@ -2,7 +2,8 @@
 
 Run locally:  python -m streamlit run app.py
 Hosted runs use a PostgreSQL database configured through Streamlit secrets
-(EXPENSES_DB_URL); local runs fall back to a SQLite file next to storage.py.
+(EXPENSES_DB_URL) and refuse to start without it. Local development uses a
+SQLite file next to storage.py only when EXPENSES_ALLOW_SQLITE=1 is set.
 """
 import os
 from datetime import date
@@ -23,6 +24,19 @@ def _secret(key, default=None):
 
 if _secret('EXPENSES_DB_URL'):
     os.environ['EXPENSES_DB_URL'] = _secret('EXPENSES_DB_URL')
+
+# Fail closed: the hosted app must never silently fall back to ephemeral
+# SQLite storage. PostgreSQL is required unless SQLite is explicitly
+# enabled for local development (EXPENSES_ALLOW_SQLITE=1).
+_ALLOW_SQLITE = os.environ.get('EXPENSES_ALLOW_SQLITE', '').strip().lower() in ('1', 'true', 'yes')
+if not os.environ.get('EXPENSES_DB_URL') and not _ALLOW_SQLITE:
+    st.set_page_config(page_title='Expense Tracker', page_icon='\U0001F4B3')
+    st.error(
+        'This app is not connected to a database yet. '
+        'The hosted deployment requires the EXPENSES_DB_URL secret (PostgreSQL). '
+        'For local development only, set EXPENSES_ALLOW_SQLITE=1 to use a local SQLite file.'
+    )
+    st.stop()
 
 from storage import CATEGORIES, init_db, list_expenses, save_expense, delete_expense, DSN
 
