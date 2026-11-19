@@ -1,0 +1,11 @@
+digraph G {
+graph [bgcolor="white",pad="0.25",ranksep="0.7",nodesep="0.4"]; node [fontname="Times New Roman",fontsize=14,shape=box,style="rounded,filled",fillcolor="#f7f9fb",color="#244d70",margin="0.15"]; edge [fontname="Times New Roman",fontsize=11,color="#374151",arrowsize=0.7];
+rankdir=TB; user [label="Local user"]; p21 [label="2.1
+Read filter range
+and category",shape=ellipse]; p22 [label="2.2
+Reject reversed range",shape=ellipse]; p23 [label="2.3
+Query joined records",shape=ellipse]; p24 [label="2.4
+Sum integer paise,
+count and group",shape=ellipse]; p25 [label="2.5
+Display INR results",shape=ellipse]; d1 [label="D1 | Categories",shape=cylinder]; d2 [label="D2 | Expenses",shape=cylinder]; user -> p21 [label="filter values"]; p21 -> p22 [label="range + category"]; p22 -> user [label="range error"]; p22 -> p23 [label="valid range"]; d1 -> p23 [label="names"]; d2 -> p23 [label="rows"]; p23 -> p24 [label="filtered rows"]; p24 -> p25 [label="totals and grouped data"]; p25 -> user [label="table, metrics and chart"];
+}
