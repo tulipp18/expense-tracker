@@ -6,7 +6,7 @@ on the hosted app), a PostgreSQL database is used instead so records persist
 across app restarts and redeploys.
 """
 from contextlib import contextmanager
-from datetime import date
+from datetime import date, timedelta
 from decimal import Decimal, InvalidOperation
 import os
 from pathlib import Path
@@ -75,12 +75,20 @@ def init_db(path=DEFAULT_DB):
                            [(x,) for x in CATEGORIES])
 
 
+def _today():
+    """'Today' follows Asia/Kolkata (UTC+5:30), matching the app's audience,
+    so an expense dated today in India is never rejected as 'future' when the
+    server's clock is still on the previous (UTC) day."""
+    from datetime import datetime
+    return (datetime.utcnow() + timedelta(hours=5, minutes=30)).date()
+
+
 def validate(spent_on, category, amount, note):
     try:
         parsed = date.fromisoformat(str(spent_on))
     except (ValueError, TypeError):
         raise ValueError('Enter a valid date.')
-    if parsed > date.today():
+    if parsed > _today():
         raise ValueError('Expense date cannot be in the future.')
     if category not in CATEGORIES:
         raise ValueError('Choose a listed category.')
