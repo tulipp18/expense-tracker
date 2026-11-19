@@ -1,12 +1,16 @@
 # Expense Tracker
+
 Software Engineering mini-project for Tulip Gupta.
 Streamlit app with validated INR expense records. Hosted runs use PostgreSQL
 (persistent storage); local runs use a SQLite file. Records are private to
 invited signed-in viewers on the hosted app.
 
 ## Live app
-Deployed on Streamlit Community Cloud. Database: PostgreSQL (Supabase free
-tier), configured through Streamlit secrets; no credentials in this repo.
+https://tulip-expense-tracker.streamlit.app/ (Streamlit Community Cloud,
+private: invited signed-in viewers only). Database: PostgreSQL (Supabase free
+tier), configured through Streamlit secrets; no credentials in this repo. The
+hosted app refuses to start without EXPENSES_DB_URL. For local development
+with the default SQLite file, set EXPENSES_ALLOW_SQLITE=1.
 
 ## Run locally
 Tested with Python 3.10.12. Python 3.10+ recommended.
