@@ -1,0 +1,25 @@
+test_category_filter (test_storage.StorageTests) ... ok
+test_create_persists_exact_paise (test_storage.StorageTests) ... ok
+test_date_filter (test_storage.StorageTests) ... ok
+test_delete (test_storage.StorageTests) ... ok
+test_extra_precision_rejected (test_storage.StorageTests) ... ok
+test_future_date_rejected (test_storage.StorageTests) ... ok
+test_idempotent_setup (test_storage.StorageTests) ... ok
+test_invalid_amount_rejected (test_storage.StorageTests) ... ok
+test_invalid_category_rejected (test_storage.StorageTests) ... ok
+test_invalid_date_rejected (test_storage.StorageTests) ... ok
+test_invalid_filter_range (test_storage.StorageTests) ... ok
+test_long_note_rejected (test_storage.StorageTests) ... ok
+test_max_amount_rejected (test_storage.StorageTests) ... ok
+test_missing_delete_rejected (test_storage.StorageTests) ... ok
+test_missing_update_rejected (test_storage.StorageTests) ... ok
+test_nan_rejected (test_storage.StorageTests) ... ok
+test_negative_rejected (test_storage.StorageTests) ... ok
+test_parameterized_note (test_storage.StorageTests) ... ok
+test_update (test_storage.StorageTests) ... ok
+test_zero_rejected (test_storage.StorageTests) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.035s
+
+OK
